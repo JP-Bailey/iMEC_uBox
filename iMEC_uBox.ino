@@ -10,6 +10,11 @@
 // create servo object to control a servo
 Servo myservo;  
 
+//variables 
+int switchValue = 0;
+int numClicks = 0;
+
+
 
 void setup() 
 {
@@ -27,7 +32,8 @@ void loop()
   if (switchValue == HIGH)      // Turns off switch if active
   {  
     command_full(myservo);
-    delay(1000);
+    delay(500);
+    numClicks++; 
 
   }
 
@@ -36,6 +42,13 @@ void loop()
   if (switchValue == LOW)      // Returns home if switch is off
   {
     command_zero(myservo);
+
+    if (numClicks >= 5)
+    {
+      command_peak(myservo);
+      numClicks = 0; 
+    }
+
   }
 
   
@@ -55,5 +68,18 @@ void command_full (Servo &theServo)
 {
   theServo.write(179);
 }
+
+//Function command_peak commands the servo to peak
+void command_peak(Servo &theServo)
+{
+  delay(1000);
+  theServo.write(150);
+  delay(1000);
+  theServo.write(160);
+  delay(1000);
+  theServo.write(0);
+  delay(1000);
+}
+
 
 
