@@ -13,7 +13,6 @@ Servo myservo;
 
 
 //Variables 
-int pos = 0;    // variable to store the servo position
 int switchValue = 0; //variable to store the value of the switch 
 
 void setup() 
